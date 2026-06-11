@@ -1,0 +1,32 @@
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+
+y_true = [1, 0, 1, 1, 0, 0, 1, 0]
+y_pred = [1, 0, 1, 0, 0, 1, 1, 0]
+
+cm = confusion_matrix(y_true, y_pred)
+
+print("Confusion Matrix")
+print(cm)
+
+plt.imshow(cm)
+plt.title("2-Class Confusion Matrix")
+plt.colorbar()
+plt.xticks([0, 1], ["Negative", "Positive"])
+plt.yticks([0, 1], ["Negative", "Positive"])
+
+for i in range(2):
+    for j in range(2):
+        plt.text(j, i, cm[i, j], ha="center", va="center")
+
+plt.xlabel("Predicted Class")
+plt.ylabel("Actual Class")
+plt.show()
+
+tn, fp, fn, tp = cm.ravel()
+
+plt.bar(["TN", "FP", "FN", "TP"], [tn, fp, fn, tp])
+plt.title("Confusion Matrix Components")
+plt.xlabel("Metrics")
+plt.ylabel("Count")
+plt.show()
